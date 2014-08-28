@@ -12,13 +12,13 @@ public class Request implements Serializable {
 
   private MetricType metricType;
   private String key;
-  private String value;
+  private int value;
   private float sampling;
 
   public Request() {
   }
 
-  public Request(MetricType metricType, String key, String value, float sampling) {
+  public Request(MetricType metricType, String key, int value, float sampling) {
     this.setMetricType(metricType).setKey(key).setValue(value).setSampling(sampling);
   }
 
@@ -40,12 +40,12 @@ public class Request implements Serializable {
     return key;
   }
 
-  public Request setValue(String value) {
+  public Request setValue(int value) {
     this.value = value;
     return this;
   }
 
-  public String getValue() {
+  public int getValue() {
     return value;
   }
 
