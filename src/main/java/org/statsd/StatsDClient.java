@@ -48,4 +48,24 @@ public class StatsDClient {
     this.requestQueue.push(request);
   }
 
+  public void count(String key, int value) {
+    Request request = new Request(MetricType.COUNTING, key, value, 0.0f);
+    this.requestQueue.push(request);
+  }
+
+  public void timing(String key, int value) {
+    Request request = new Request(MetricType.TIMING, key, value, 0.0f);
+    this.requestQueue.push(request);
+  }
+
+  public void gauge(String key, int value) {
+    Request request = new Request(MetricType.GAUGES, key, value, 0.0f);
+    this.requestQueue.push(request);
+  }
+
+  public void set(String key, int value) {
+    Request request = new Request(MetricType.SETS, key, value, 0.0f);
+    this.requestQueue.push(request);
+  }
+
 }
