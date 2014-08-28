@@ -1,13 +1,15 @@
 /*
  * Connection interface
- * @author - legolas
+ * @author - souravupadhyay
  */
 
 package org.statsd.connection;
 
+import java.io.IOException;
+
 public interface Connection {
 
-  public void send();
-  public Object recieve();
+  public void send(byte[] data) throws IOException;
+  public byte[] receive() throws IOException;
 
 }
