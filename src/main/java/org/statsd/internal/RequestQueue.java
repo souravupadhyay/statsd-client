@@ -10,13 +10,21 @@ import java.util.ArrayDeque;
 
 public class RequestQueue {
 
+  private long queueSize;
   private Deque<Request> queue;
 
   public RequestQueue() {
     queue = new ArrayDeque<Request>();
   }
 
+  public RequestQueue(long queueSize) {
+    this.queueSize = queueSize;
+    queue = new ArrayDeque<Request>();
+  }
+
   public synchronized void push(Request request) {
+    if(queue.size() >= queueSize)
+      pop();
     queue.push(request);
   }
 

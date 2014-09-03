@@ -18,13 +18,15 @@ public enum MetricType {
     this.type = type;
   }
 
-  public String getProtocolString(String key, int value, float sampling) {
-    StringBuilder stringBuilder = new StringBuilder(key);
+  public String getProtocolString(String prefix, String key, int value, float sampling) {
+    StringBuilder stringBuilder = new StringBuilder(prefix);
+    stringBuilder.append(".");
+    stringBuilder.append(key);
     stringBuilder.append(":");
     stringBuilder.append(value);
     stringBuilder.append("|");
     stringBuilder.append(this.type);
-    if(sampling != 0.0f) {
+    if(sampling != 0.0d) {
       stringBuilder.append("|@");
       stringBuilder.append(sampling);
     }

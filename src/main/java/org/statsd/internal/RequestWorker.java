@@ -25,7 +25,7 @@ public class RequestWorker implements Runnable {
     while(true) {
       try {
         request = requestQueue.pop();
-        String protocolString = request.getMetricType().getProtocolString(request.getKey(), request.getValue(), request.getSampling());
+        String protocolString = request.getMetricType().getProtocolString(request.getPrefix(), request.getKey(), request.getValue(), request.getSampling());
         connection.send(protocolString.getBytes());
       } catch(Exception e) {
         // keep running

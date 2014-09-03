@@ -1,71 +1,28 @@
 /*
- * StatsDClient - client singleton class for statsD
- * @author - souravupadhyay
+ * StatsDClient - Interface that defines client functionality
+ * @author - souravupadhay
  */
 
 package org.statsd;
 
-import java.util.Deque;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+public interface StatsDClient {
 
-import org.statsd.connection.Connection;
-import org.statsd.connection.UDPConnection;
-import org.statsd.internal.MetricType;
-import org.statsd.internal.Request;
-import org.statsd.internal.RequestQueue;
-import org.statsd.internal.RequestWorker;
+  public void count(String key, long delta);
 
-public class StatsDClient {
+  public void count(String key, long delta, double sampleRate);
 
-  private Connection connection;
-  private RequestQueue requestQueue;
-  private RequestWorker requestWorker;
+  public void increment(String key);
 
-  public StatsDClient(String host, int port) throws UnknownHostException, SocketException {
-    this.connection = new UDPConnection(host, port);
-    this.requestQueue = new RequestQueue();
-    this.requestWorker = new RequestWorker(this.requestQueue, this.connection);
-  }
+  public void decrement(String key);
 
-  public void count(String key, int value, float sampling) {
-    Request request = new Request(MetricType.COUNTING, key, value, sampling);
-    this.requestQueue.push(request);
-  }
+  public void gauge(String key, long value);
 
-  public void timing(String key, int value, float sampling) {
-    Request request = new Request(MetricType.TIMING, key, value, sampling);
-    this.requestQueue.push(request);
-  }
+  public void gauge(String key, double value);
 
-  public void gauge(String key, int value, float sampling) {
-    Request request = new Request(MetricType.GAUGES, key, value, sampling);
-    this.requestQueue.push(request);
-  }
+  public void set(String key, String event);
 
-  public void set(String key, int value, float sampling) {
-    Request request = new Request(MetricType.SETS, key, value, sampling);
-    this.requestQueue.push(request);
-  }
+  public void recordTime(String key, long timeInMs);
 
-  public void count(String key, int value) {
-    Request request = new Request(MetricType.COUNTING, key, value, 0.0f);
-    this.requestQueue.push(request);
-  }
-
-  public void timing(String key, int value) {
-    Request request = new Request(MetricType.TIMING, key, value, 0.0f);
-    this.requestQueue.push(request);
-  }
-
-  public void gauge(String key, int value) {
-    Request request = new Request(MetricType.GAUGES, key, value, 0.0f);
-    this.requestQueue.push(request);
-  }
-
-  public void set(String key, int value) {
-    Request request = new Request(MetricType.SETS, key, value, 0.0f);
-    this.requestQueue.push(request);
-  }
+  public void recordTime(String key, long timeInMs, double sampleRate);
 
 }

@@ -11,15 +11,17 @@ import java.io.Serializable;
 public class Request implements Serializable {
 
   private MetricType metricType;
+  private String prefix;
   private String key;
-  private int value;
-  private float sampling;
+  private String value;
+  private double sampling;
 
-  public Request() {
+  public Request(MetricType metricType, String prefix, String key, String value) {
+    this.setMetricType(metricType).setPrefix(prefix).setKey(key).setValue(value);
   }
 
-  public Request(MetricType metricType, String key, int value, float sampling) {
-    this.setMetricType(metricType).setKey(key).setValue(value).setSampling(sampling);
+  public Request(MetricType metricType, String prefix, String key, String value, double sampling) {
+    this.setMetricType(metricType).setPrefix(prefix).setKey(key).setValue(value).setSampling(sampling);
   }
 
   public Request setMetricType(MetricType metricType) {
@@ -31,6 +33,15 @@ public class Request implements Serializable {
     return metricType;
   }
 
+  public Request setPrefix(String prefix) {
+    this.prefix = prefix;
+    return this;
+  }
+
+  public String getPrefix() {
+    return prefix;
+  }
+
   public Request setKey(String key) {
     this.key = key;
     return this;
@@ -40,21 +51,21 @@ public class Request implements Serializable {
     return key;
   }
 
-  public Request setValue(int value) {
+  public Request setValue(String value) {
     this.value = value;
     return this;
   }
 
-  public int getValue() {
+  public String getValue() {
     return value;
   }
 
-  public Request setSampling(float sampling) {
+  public Request setSampling(double sampling) {
     this.sampling = sampling;
     return this;
   }
 
-  public float getSampling() {
+  public double getSampling() {
     return sampling;
   }
 
