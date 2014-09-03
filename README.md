@@ -12,7 +12,7 @@ Usage
 ```
 // constructors
 AsyncStatsDClient(String prefix, String host, int port); // throws UnknownHostException, SocketException
-AsyncStatsDClient(String prefix, String host, int port, unsigned int queueSize); // throws UnknownHostException, SocketException, IllegalArgumentException
+AsyncStatsDClient(String prefix, String host, int port, long queueSize); // throws UnknownHostException, SocketException, IllegalArgumentException
 // usage
 StatsDClient statsdClient = new AsyncStatsDClient("my.prefix", "localhost", 9483);
 StatsDClient statsdClient = new AsyncStatsDClient("my.prefix", "localhost", 9483, 200); // 200 = queue size
