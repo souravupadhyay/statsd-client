@@ -18,7 +18,7 @@ public enum MetricType {
     this.type = type;
   }
 
-  public String getProtocolString(String prefix, String key, int value, float sampling) {
+  public String getProtocolString(String prefix, String key, String value, double sampling) {
     StringBuilder stringBuilder = new StringBuilder(prefix);
     stringBuilder.append(".");
     stringBuilder.append(key);
