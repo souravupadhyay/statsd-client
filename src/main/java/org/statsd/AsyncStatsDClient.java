@@ -31,6 +31,9 @@ public class AsyncStatsDClient implements StatsDClient {
   }
 
   public AsyncStatsDClient(String prefix, String host, int port, long queueSize) throws UnknownHostException, SocketException {
+    if(queueSize <= 0) {
+      throw new IllegalArgumentException("'queueSize' cannot be non-positive");
+    }
     this.prefix = prefix;
     this.connection = new UDPConnection(host, port);
     this.requestQueue = new RequestQueue(queueSize);
